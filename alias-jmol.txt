@@ -1,0 +1,1 @@
+alias jmol='java -jar jmol-13.2.7/Jmol.jar'
