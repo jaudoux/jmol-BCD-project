@@ -1,0 +1,7 @@
+load data/1a2c.pdb
+
+header = getProperty('fileHeader')
+lines = header.split("\n");
+for(i = 1; i < lines.size; i++) {
+  print lines[i][1][3]
+}
