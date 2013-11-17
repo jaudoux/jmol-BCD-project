@@ -34,7 +34,10 @@ SOURCE  12 ORGANISM_TAXID: 1126
 KEYWDS    HYDROLASE, SERINE PROTEASE, HYDROLASE-HYDROLASE INHIBITOR COMPLEX     
 EXPDTA    X-RAY DIFFRACTION                                                     
 AUTHOR    J.L.RIOS-STEINER,M.MURAKAMI,A.TULINSKY                                
+<<<<<<< HEAD
 REVDAT   5   05-JUN-13 1A2C    1       HETATM                                   
+=======
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 REVDAT   4   13-JUL-11 1A2C    1       VERSN                                    
 REVDAT   3   07-APR-10 1A2C    1       DBREF                                    
 REVDAT   2   24-FEB-09 1A2C    1       VERSN                                    
@@ -263,6 +266,7 @@ REMARK 400 IDENTIFIER *H* IS USED FOR RESIDUES 16 - 247.  RESIDUES
 REMARK 400 355 - 364 REPRESENT THE HIRUGEN AND HAVE BEEN ASSIGNED               
 REMARK 400 CHAIN IDENTIFIER *I*. THE HIRUGEN RESIDUE NUMBERING                  
 REMARK 400 CORRESPONDS TO THE C-TERMINAL RESIDUES OF HIRUDIN.                   
+<<<<<<< HEAD
 REMARK 400                                                                      
 REMARK 400 THE AERUGINOSIN 298-A IS OLIGOPEPTIDE, A MEMBER OF THROMBIN          
 REMARK 400 INHIBITOR, TRYPSIN INHIBITOR CLASS.                                  
@@ -272,6 +276,8 @@ REMARK 400   NAME: AERUGINOSIN 298-A
 REMARK 400   CHAIN: J                                                           
 REMARK 400   COMPONENT_1: PEPTIDE LIKE POLYMER                                  
 REMARK 400   DESCRIPTION: NULL                                                  
+=======
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 REMARK 465                                                                      
 REMARK 465 MISSING RESIDUES                                                     
 REMARK 465 THE FOLLOWING RESIDUES WERE NOT LOCATED IN THE                       
@@ -541,11 +547,18 @@ REMARK 525 NUMBER; I=INSERTION CODE):
 REMARK 525                                                                      
 REMARK 525  M RES CSSEQI                                                        
 REMARK 525    HOH H 488        DISTANCE =  5.14 ANGSTROMS                       
+<<<<<<< HEAD
 REMARK 525    HOH H 518        DISTANCE =  5.82 ANGSTROMS                       
 REMARK 525    HOH H 526        DISTANCE =  5.70 ANGSTROMS                       
 REMARK 525    HOH H 538        DISTANCE =  5.08 ANGSTROMS                       
 REMARK 525    HOH H 564        DISTANCE =  6.50 ANGSTROMS                       
 REMARK 525    HOH H 572        DISTANCE =  6.89 ANGSTROMS                       
+=======
+REMARK 525    HOH H 526        DISTANCE =  5.70 ANGSTROMS                       
+REMARK 525    HOH H 538        DISTANCE =  5.08 ANGSTROMS                       
+REMARK 525    HOH H 564        DISTANCE =  6.50 ANGSTROMS                       
+REMARK 525    HOH H 593        DISTANCE =  5.55 ANGSTROMS                       
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 REMARK 525    HOH H 602        DISTANCE =  5.26 ANGSTROMS                       
 REMARK 525    HOH H 618        DISTANCE =  5.92 ANGSTROMS                       
 REMARK 525    HOH J 592        DISTANCE =  5.81 ANGSTROMS                       
@@ -609,7 +622,10 @@ SEQRES   1 I   12  ASN GLY ASP PHE GLU GLU ILE PRO GLU GLU TYS LEU
 SEQRES   1 J    4  34H LEU PRJ OAR                                              
 MODRES 1A2C TYS I  363  TYR  O-SULFO-L-TYROSINE                                 
 MODRES 1A2C PRJ J    3  PRO                                                     
+<<<<<<< HEAD
 MODRES 1A2C OAR J    4  ARG  N-(4-AMINO-5-HYDROXY-PENTYL)-GUANIDINE             
+=======
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 HET    TYS  I 363      16                                                       
 HET    34H  J   1      12                                                       
 HET    PRJ  J   3      12                                                       
@@ -3121,6 +3137,7 @@ HETATM 2441  C13 PRJ J   3      19.730 -16.368  19.498  1.00 35.81           C
 HETATM 2442  C14 PRJ J   3      18.328 -16.047  20.146  1.00 35.43           C  
 HETATM 2443  CD  PRJ J   3      18.518 -15.334  21.587  1.00 34.90           C  
 HETATM 2444  O2  PRJ J   3      20.409 -17.461  20.107  1.00 36.25           O  
+<<<<<<< HEAD
 HETATM 2445  O   OAR J   4      15.761 -11.052  17.937  1.00 33.76           O  
 HETATM 2446  N1  OAR J   4      15.461 -11.891  20.571  1.00 33.49           N  
 HETATM 2447  NE  OAR J   4      11.498 -12.160  23.680  1.00 29.99           N  
@@ -3132,6 +3149,19 @@ HETATM 2452  CG  OAR J   4      13.174 -11.783  21.908  1.00 30.27           C
 HETATM 2453  CD  OAR J   4      12.218 -11.100  22.929  1.00 29.94           C  
 HETATM 2454  CZ  OAR J   4      10.674 -11.833  24.720  1.00 29.47           C  
 HETATM 2455  C   OAR J   4      14.551 -10.698  18.713  1.00 33.28           C  
+=======
+HETATM 2445  OH1 OAR J   4      15.761 -11.052  17.937  1.00 33.76           O  
+HETATM 2446  N1  OAR J   4      15.461 -11.891  20.571  1.00 33.49           N  
+HETATM 2447  N2  OAR J   4      11.498 -12.160  23.680  1.00 29.99           N  
+HETATM 2448  N3  OAR J   4      10.157 -12.834  25.468  1.00 29.35           N  
+HETATM 2449  N4  OAR J   4      10.367 -10.548  25.008  1.00 29.07           N  
+HETATM 2450  C1  OAR J   4      14.254 -11.607  19.907  1.00 33.28           C  
+HETATM 2451  C2  OAR J   4      13.209 -10.809  20.739  1.00 32.00           C  
+HETATM 2452  C3  OAR J   4      13.174 -11.783  21.908  1.00 30.27           C  
+HETATM 2453  C4  OAR J   4      12.218 -11.100  22.929  1.00 29.94           C  
+HETATM 2454  C5  OAR J   4      10.674 -11.833  24.720  1.00 29.47           C  
+HETATM 2455  C6  OAR J   4      14.551 -10.698  18.713  1.00 33.28           C  
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 TER    2456      OAR J   4                                                      
 HETATM 2457 NA    NA H 626       5.884 -13.758  30.449  1.00 28.00          NA  
 HETATM 2458  O   HOH H 450      12.284  -8.265  25.198  1.00 11.36           O  
@@ -3377,5 +3407,9 @@ CONECT 2454 2447 2448 2449
 CONECT 2455 2445 2450                                                           
 CONECT 2457 2085 2108 2503                                                      
 CONECT 2503 2457                                                                
+<<<<<<< HEAD
 MASTER      534    0    5    8   13    0    9    6 2629    4   67   25          
+=======
+MASTER      524    0    5    8   13    0    9    6 2629    4   67   25          
+>>>>>>> fdaaaee1c30fcf6125e817a7016d3f94aaa76659
 END                                                                             
