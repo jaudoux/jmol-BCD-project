@@ -5,9 +5,50 @@ seqres = header.find("SEQRES");
 
 lines = header.split("\n");
 
-//for(i = 1; i < lines.size; i++) {
-for(i = 1; i < 3; i++) {
+var chains = {}
+var current_chain_id = "";
+var current_chain = array();
+
+for(i = 1; i < lines.size; i++) {
+//for(i = 1; i < 3; i++) {
   if(lines[i].find("SEQRES")) {
-    print lines[i].split(" ")
+    var line = lines[i]
+    var chain_id = line[12][12]
+    if(chain_id != current_chain_id) {
+      if(current_chain_id != "") {
+        chains[current_chain_id] = current_chain
+      }
+      current_chain_id = chain_id
+      current_chain = array()
+    }
+    //print chain_id
+    acids = line[20][70].split(" ")
+    for(j = 1; j < acids.size; j++) {
+      if(acids[j].length == 3) {
+        current_chain = current_chain + acids[j]
+      }
+    }
+    //print current_chain
   }
 }
+// add the last one
+chains[current_chain_id] = current_chain
+
+print chains
+
+chain_info = getproperty('polymerInfo')
+print chain_info.size
+size = chain_info.size
+for(i = 1; i <= size; i++) {
+  for(j = 1; j <= chain_info[i].size; j++) {
+    print chain_info[i][j].size
+  }
+}
+
+//
+//for(model = 1; model < chain_info.size; model++) {
+//  print chain_info[model]
+//  //for(chain = 1; chain < chain_info[model].size; chain++) {
+//  //  print chain_info[model][chain]
+//  //}
+//}
