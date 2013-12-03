@@ -1,0 +1,52 @@
+UpperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ; /*variable globale*/
+LowerCaseLetters = "abcdefghijklmnopqrstuvwxyz" ; /*variable globale*/
+
+function toUpperCase(string) {
+  var n = UpperCaseLetters.size ;
+  var out = string ;
+  for (var i=0 ; i<n ; i++) {
+    out = out.replace(LowerCaseLetters[i],UpperCaseLetters[i]) ;
+  } ;
+  return out ;
+}
+
+function toLowerCase(string) {
+  var n = LowerCaseLetters.size ;
+  var out = string ;
+  for (var i=0 ; i<n ; i++) {
+    out = out.replace(UpperCaseLetters[i],LowerCaseLetters[i]) ;
+  } ;
+  return out ;
+}
+
+A_AAA = {"A" : "ALA","C" : "CYS","D" : "ASP","E" : "GLU","F" : "PHE","G" :
+"GLY","H" : "HIS","I" : "ILE","K" : "LYS","L" : "LEU","M" : "MET","N" :
+"ASN","O" : "PYL","P" : "PRO","Q" : "GLN","R" : "ARG","S" : "SER","T" :
+"THR","U" : "SEC","V" : "VAL","W" : "TRP","Y" : "TYR"};
+
+AAA_A = {"ALA" : "A","CYS" : "C","ASP" : "D","GLU" : "E","PHE" : "F","GLY" :
+"G","HIS" : "H","ILE" : "I","LYS" : "K","LEU" : "L","MET" : "M","ASN" :
+"N","PYL" : "O","PRO" : "P","GLN" : "Q","ARG" : "R","SER" : "S","THR" :
+"T","SEC" : "U","VAL" : "V","TRP" : "W","TYR" : "Y"};
+
+function tr1to3(string) {
+  var code = toUpperCase(string);
+  if(A_AAA[code] == '') {
+    return '?';
+  } else {
+    return A_AAA[code] ;
+  }
+}
+
+function tr3to1(string) {
+  var code = toUpperCase(string);
+  if(AAA_A[code] == '') {
+    return '???';
+  } else {
+    return AAA_A[code] ;
+  }
+}
+
+function getFileHeader(modId) {
+  var active_models = _modelNumber;
+}
