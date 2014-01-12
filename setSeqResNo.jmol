@@ -1,54 +1,167 @@
-load data/1a2c.pdb
+//load data/1a2c.pdb // Test file
+load data/2kfu.pdb
+var mod_id = 1
 
-header = getProperty('fileHeader')
-seqres = header.find("SEQRES");
+// Problem with ATOM marked as HETATM
+set selectHetero ON
 
-lines = header.split("\n");
+AAA_ID  = {"noGroup": 0, "ALA" : 1, "ARG" : 2, "ASN" : 3, "ASP" : 4, "CYS" : 5,
+"GLN" : 6, "GLU" : 7, "GLY" : 8, "HIS" : 9, "ILE" : 10,
+"LEU" : 11, "LYS" : 12, "MET" : 13, "PHE" : 14, "PRO" : 15,
+"SER" : 16, "THR" : 17, "TRP" : 18, "TYR" : 19, "VAL" : 20,
+"ASX" : 21, "GLX" : 22, "UNK" : 23};
 
+ID_AAA  = {"0" : "noGroup", "1" : "ALA", "2" : "ARG", "3" : "ASN", "4" : "ASP",
+"5" : "CYS", "6" : "GLN", "7" : "GLU", "8" : "GLY", "9" : "HIS", "10" : "ILE",
+"11" : "LEU", "12" : "LYS", "13" : "MET", "14" : "PHE", "15" : "PRO", "16" :
+"SER", "17" : "THR", "18" : "TRP", "19" : "TYR", "20" : "VAL", "21" : "ASX",
+"22" : "GLX", "23" : "UNK"};
+
+//--------------------------------------------
+//         PART I : get SEQRES info
+//------------------------------------------->
+
+var header = getProperty('fileHeader')
+var header_lines = header.split("\n");
 var chains = {}
+
+// Temp vars for PART I
 var current_chain_id = "";
 var current_chain = array();
 
-for(i = 1; i < lines.size; i++) {
-//for(i = 1; i < 3; i++) {
-  if(lines[i].find("SEQRES")) {
-    var line = lines[i]
+for(i = 1; i <= header_lines.size; i++) {
+  // If this header line is a SEQRES line
+  if(header_lines[i].find("SEQRES")) {
+
+    // get current line
+    var line = header_lines[i]
+
+    // Get chain id (12th character)
     var chain_id = line[12][12]
+
+    // If this SEQRES line describe a new chain
+    // 1. Save previous chain in "chains" associative array
+    // 2. Reset "current chain" informations
     if(chain_id != current_chain_id) {
+
       if(current_chain_id != "") {
         chains[current_chain_id] = current_chain
       }
+
       current_chain_id = chain_id
       current_chain = array()
+
     }
     //print chain_id
+
+    // Get residues in an array
     acids = line[20][70].split(" ")
-    for(j = 1; j < acids.size; j++) {
+
+    // For each residues, append them to the "current chain"
+    for(j = 1; j <= acids.size; j++) {
+
       if(acids[j].length == 3) {
         current_chain = current_chain + acids[j]
       }
+
     }
     //print current_chain
   }
 }
-// add the last one
+
+// add the last "current chain"
 chains[current_chain_id] = current_chain
 
-print chains
-
-chain_info = getproperty('polymerInfo')
-print chain_info.size
-size = chain_info.size
-for(i = 1; i <= size; i++) {
-  for(j = 1; j <= chain_info[i].size; j++) {
-    print chain_info[i][j].size
+// Now we check for modified residues
+var MODRES = {};
+for(i = 1; i <= header_lines.size; i++) {
+  if(header_lines[i].find("MODRES")) {
+    var line = header_lines[i];
+    var mod_res = line[13][15]
+    var original_res = line[25][27]
+    MODRES[mod_res] = original_res
   }
 }
 
-//
-//for(model = 1; model < chain_info.size; model++) {
-//  print chain_info[model]
-//  //for(chain = 1; chain < chain_info[model].size; chain++) {
-//  //  print chain_info[model][chain]
-//  //}
-//}
+//<------------ END PART I
+
+
+//--------------------------------------------
+//      PART II : set property_seqresno
+//------------------------------------------->
+
+chains_keys = chains.keys
+
+// TODO Check missing residues and HOH values
+// Loop over chains to set seqResNo
+for(i = 1; i <= chains_keys.size; i++) {
+  curr_chain_id = chains_keys[i]
+  print "Chain ID : " + curr_chain_id
+  chain_info = getproperty('chainInfo',{chain=curr_chain_id})
+  curr_chain = chain_info['models'][mod_id]['chains'][1]['residues']
+  // Index to go through atoms list of chain_info
+  atom_ind = 1;
+  // Loop over SEQRES residues list
+  for(seqres_ind = 1; seqres_ind <= curr_chain.size; seqres_ind++) {
+    seqres_group = chains[curr_chain_id][seqres_ind]
+    resno = curr_chain[atom_ind]['seqCode']
+    // If this is a modified residue
+    if(ID_AAA[curr_chain[atom_ind]['groupID']] == "") {
+      atom_group = curr_chain[atom_ind]['atomInfo2'][2][4] // Other possibility to get groupID
+      //seqres_group = chains[curr_chain_id][seqres_ind]
+    } else {
+      atom_group = ID_AAA[curr_chain[atom_ind]['groupID']] // Other possibility to get groupID
+    }
+    //atomno = curr_chain[atom_ind]['_apt2']
+    //atom_group = {atomno = atomno}.group
+
+    //print "SEQRES element : " + seqres_group
+    //print "ATOM element : " + atom_group
+    
+    if(atom_group == seqres_group) {
+      {resno = resno}.property_seqresno = seqres_ind;
+      atom_ind++;
+      //print {resno = resno}.property_seqresno
+    }
+  }
+}
+
+//<------------ END PART II
+
+//--------------------------------------------
+//      PART II : qresno && qsmil
+//------------------------------------------->
+// Use (0 + String) to froce conversion
+script data/BLAST_alignement1_2KFU-A.jmol
+
+print Hit_def
+
+// SET QRESNO
+var chains_info = getproperty('chainInfo')['models'][mod_id]['chains']
+for(i = 0; i < chains_info.size; i++) {
+  var chain = chains_info[i]
+  for(j = 1; j <= chain['residues'].size; j++) {
+    var res = chain['residues'][j]
+    resno = res['seqCode']
+    seqresno = {resno = resno}.property_seqresno
+    if(seqresno >= (0 + Hsp_hit_from) && seqresno <= (0 + Hsp_hit_to)) {
+      // set QresNo
+      {resno = resno}.property_qresno = (0 + Hsp_query_from) - (0 + Hsp_hit_from) + seqresno;
+      print seqresno
+      var res_relative_hit_ind = seqresno - (0 + Hsp_hit_from) + 1
+      print Hsp_hseq[res_relative_hit_ind]
+      // Set Qsmil
+      if(Hsp_midline[res_relative_hit_ind] == '+') {
+        {resno = resno}.property_qsmil = 1;
+      } elseif(Hsp_midline[res_relative_hit_ind] == ' ') {
+        {resno = resno}.property_qsmil = 0;
+      } else {
+        {resno = resno}.property_qsmil = 2;
+      }
+    } else {
+      {resno = resno}.property_qresno = -1;
+      {resno = resno}.property_qsmil = -1;
+    } // TODO manage gaps
+  }
+}
+//curr_chain = chain_info['models'][mod_id]['chains'][1]['residues']
